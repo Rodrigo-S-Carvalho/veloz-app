@@ -143,7 +143,7 @@ veloz-app/
 
 ## 13. VÍDEO PITCH
 
-[Link do vídeo no YouTube]
+https://youtu.be/1PcKB2iOpew
 
 ---
 
