@@ -1,0 +1,163 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 40px;
+    max-width: 700px;
+    width: 100%;
+    margin: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e8ecf1;
+    padding-bottom: 20px;
+}
+
+header h1 {
+    color: #1a73e8;
+    font-size: 28px;
+}
+
+header p {
+    color: #5f6368;
+    margin-top: 5px;
+}
+
+.form-section {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.form-section h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #202124;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #5f6368;
+}
+
+.form-group select,
+.form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #dadce0;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+    border-color: #1a73e8;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #1557b0;
+}
+
+#response-message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 6px;
+    display: none;
+}
+
+#response-message.success {
+    display: block;
+    background: #e6f4ea;
+    color: #1e7e34;
+    border: 1px solid #b7e1cd;
+}
+
+#response-message.error {
+    display: block;
+    background: #fce8e6;
+    color: #c62828;
+    border: 1px solid #f5c6cb;
+}
+
+.info-section h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #202124;
+}
+
+.service-card {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border-left: 4px solid #dadce0;
+}
+
+.service-name {
+    font-weight: 500;
+}
+
+.status {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.status.loading {
+    color: #f9ab00;
+}
+
+.status.online {
+    color: #1e7e34;
+}
+
+.status.offline {
+    color: #c62828;
+}
+
+input[aria-invalid="true"],
+select[aria-invalid="true"] {
+    border-color: #c62828;
+}

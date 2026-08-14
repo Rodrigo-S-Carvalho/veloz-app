@@ -1,0 +1,14 @@
+{
+  "name": "servico-estoque",
+  "version": "1.0.0",
+  "description": "Serviço de Estoque - Loja Veloz",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"No tests defined\" && exit 0"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "type": "commonjs"
+}

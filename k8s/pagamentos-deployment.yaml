@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pagamentos
+  namespace: loja-veloz
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pagamentos
+  template:
+    metadata:
+      labels:
+        app: pagamentos
+    spec:
+      imagePullSecrets:
+      - name: dockerhub-secret
+      containers:
+      - name: pagamentos
+        image: rcarv/pagamentos:latest
+        ports:
+        - containerPort: 8082
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8082
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8082
+          initialDelaySeconds: 10
+          periodSeconds: 5

@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  namespace: loja-veloz
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      imagePullSecrets:
+      - name: dockerhub-secret
+      containers:
+      - name: api-gateway
+        image: rcarv/api-gateway:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PEDIDOS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: pedidos-config
+              key: PEDIDOS_URL
+        - name: PAGAMENTOS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: pedidos-config
+              key: PAGAMENTOS_URL
+        - name: ESTOQUE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: pedidos-config
+              key: ESTOQUE_URL
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5

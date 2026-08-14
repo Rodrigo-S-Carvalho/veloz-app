@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Veloz - Pedidos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Loja Veloz</h1>
+            <p>Sistema de Pedidos</p>
+        </header>
+        <main>
+            <section class="form-section">
+                <h2>Novo Pedido</h2>
+                <form id="order-form" novalidate>
+                    <div class="form-group">
+                        <label for="produto">Produto</label>
+                        <select id="produto" required>
+                            <option value="">Selecione um produto</option>
+                            <option value="notebook">Notebook</option>
+                            <option value="smartphone">Smartphone</option>
+                            <option value="fone">Fone de Ouvido</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantidade">Quantidade</label>
+                        <input type="number" id="quantidade" min="1" max="999" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="usuario">Usuario</label>
+                        <input type="text" id="usuario" placeholder="Digite seu nome" maxlength="50" pattern="[A-Za-zÀ-ÿ ]{2,50}" required>
+                    </div>
+                    <button type="submit">Criar Pedido</button>
+                </form>
+                <div id="response-message" role="alert" aria-live="polite"></div>
+            </section>
+            <section class="info-section">
+                <h2>Status dos Servicos</h2>
+                <div id="health-status">
+                    <div class="service-card">
+                        <span class="service-name">API Gateway</span>
+                        <span id="health-gateway" class="status loading">Verificando...</span>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-name">Pedidos</span>
+                        <span id="health-pedidos" class="status loading">Verificando...</span>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-name">Pagamentos</span>
+                        <span id="health-pagamentos" class="status loading">Verificando...</span>
+                    </div>
+                    <div class="service-card">
+                        <span class="service-name">Estoque</span>
+                        <span id="health-estoque" class="status loading">Verificando...</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

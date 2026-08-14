@@ -1,0 +1,87 @@
+#version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: pedidos-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin123
+      MYSQL_DATABASE: pedidos
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - loja-net
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      PEDIDOS_URL: http://pedidos:8081
+      PAGAMENTOS_URL: http://pagamentos:8082
+      ESTOQUE_URL: http://estoque:8083
+    depends_on:
+      - pedidos
+      - pagamentos
+      - estoque
+    networks:
+      - loja-net
+
+  pedidos:
+    build: ./pedidos
+    container_name: pedidos
+    ports:
+      - "8081:8081"
+    environment:
+      DB_HOST: mysql
+      DB_USER: admin
+      DB_PASSWORD: admin123
+      DB_NAME: pedidos
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - loja-net
+
+  pagamentos:
+    build: ./pagamentos
+    container_name: pagamentos
+    ports:
+      - "8082:8082"
+    networks:
+      - loja-net
+
+  estoque:
+    build: ./estoque
+    container_name: estoque
+    ports:
+      - "8083:8083"
+    networks:
+      - loja-net
+
+  web:
+    build: ./web
+    container_name: web-interface
+    ports:
+      - "8084:80"
+    depends_on:
+      - api-gateway
+    networks:
+      - loja-net
+
+volumes:
+  mysql_data:
+
+networks:
+  loja-net:
+    driver: bridge
